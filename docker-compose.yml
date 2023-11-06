@@ -1,0 +1,42 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:7.0
+    container_name: mongodb
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - redis:/data
+  
+  app: 
+    image: yanovitchsky/pfeo:v1
+    depends_on:
+      - mongo
+      - redis
+    ports: 
+      - "3000:3000"
+    volumes:
+      - pfeo_game:/app
+    # env_file: .env.production
+    tty: true
+    environment:
+      RAILS_ENV: production
+      MONGO_URL: mongodb://mongo:27017/pfeo_production
+      REDIS_URL: redis://redis:6379/1
+      PORT: 3000
+      RAILS_SERVE_STATIC_FILES: 'true'
+
+volumes:
+  mongo_data:
+  redis:
+  pfeo_game:
