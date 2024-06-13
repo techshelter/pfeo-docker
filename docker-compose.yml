@@ -19,7 +19,7 @@ services:
       - redis:/data
   
   app: 
-    image: yanovitchsky/pfeo:v2
+    image: yanovitchsky/pfeo:v3
     depends_on:
       - mongo
       - redis
