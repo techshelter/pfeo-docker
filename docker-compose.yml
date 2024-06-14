@@ -36,6 +36,7 @@ services:
       REDIS_URL: redis://redis:6379/1
       PORT: 3000
       RAILS_SERVE_STATIC_FILES: 'true'
+      SECRET_KEY_BASE: de9737764f76e3a0bdbbb55a8ee75e367373d920a648fc8d95061fda3ea34839040ead154845d6cd2af9f9a33a915ccdfdd5de752ed470aad9853f984264ad7d
 
 volumes:
   mongo_data:
